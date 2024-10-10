@@ -1,12 +1,20 @@
-import * as mongoose from 'mongoose';
-import { model } from 'mongoose';
+import * as mongoose from 'mongoose'
+import { Schema, model, Document } from 'mongoose';
 
-const categorySchema = new mongoose.Schema({
+interface Category extends Document {
+    name: string;
+    user_id: Schema.Types.ObjectId;
+    created_at: Date;
+    updated_at: Date;
+    //cuisine: Schema.Types.ObjectId[];
+  }
+
+  const categorySchema = new Schema<Category>({
     name: { type: String, required: true },
-    photo: { type: String, required: false },
-    status: { type: Boolean, required: true },
-    created_at: { type: Date, required: true, default: new Date()},
-    updated_at: { type: Date, required: true, default: new Date()}
-});
-
-export default model('categories', categorySchema);
+    user_id: { type: Schema.Types.ObjectId, required: true },
+    created_at: { type: Date, required: true, default: new Date() },
+    updated_at: { type: Date, required: true, default: new Date() },
+    //cuisine: [{ type: Schema.Types.ObjectId, ref: 'cuisines' }]
+  });
+  
+  export default model<Category>('categories', categorySchema);

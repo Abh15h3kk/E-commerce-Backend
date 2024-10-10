@@ -1,36 +1,36 @@
 import { Router } from "express";
-import { GlobalMiddleWare } from "../middlewares/GlobalMiddleWare";
-import { CityController } from '../controllers/CityController';
-import { CityValidators } from '../validators/CityValidators';
+import { GlobalMiddleware } from "../middlewares/GlobalMiddleware";
+import { Utils } from "../utils/Utils";
+import { CityController } from "../controllers/CityController";
+import { CityValidators } from "../validators/CityValidators";
 
 class CityRouter {
+    public router: Router
 
-    public router: Router;
-
-    constructor() {
-        this.router = Router();
-        this.getRoutes();
-        this.postRoutes();
-        this.patchRoutes();
-        this.putRoutes();
-        this.deleteRoutes();
+    constructor(){
+        this.router = Router()
+        this.getRoutes()
+        this.postRoutes()
+        this.patchRoutes()
+        this.putRoutes()
+        this.deleteRoutes()
     }
-
+    
     getRoutes() {
-        this.router.get('/cities', CityController.getCities);
+        this.router.get('/all/cities',CityController.getCities)
     }
-
     postRoutes() {
-        this.router.post('/create', CityValidators.addCity(), GlobalMiddleWare.checkError, CityController.addCity);
+        this.router.post('/create/city',CityValidators.addCity(),GlobalMiddleware.checkError,CityController.addCity)
     }
-
     patchRoutes() {
+        
     }
-
-    putRoutes() {}
-
-    deleteRoutes() {}
-
+    putRoutes() {
+        
+    }
+    deleteRoutes() {
+        
+    }
 }
 
-export default new CityRouter().router;
+export default new CityRouter().router
